@@ -37,28 +37,18 @@ class PostController extends Controller
             Post::create($item);
         }
         dd('Okok');
-//        Post::create([
-//            'title' => 'another title from post',
-//            'content' => 'another content from post',
-//            'image' => 'another img.jpeg',
-//            'likes' => '33',
-//            'is_published' => '1',
-//        ]);
-//        dd('ok');
     }
 
     public function update(){
-    $post = Post::find(6);
-
-    $post->update([
-        'title' => '6another title from post',
-           'content' => '6another content from post',
-           'image' => '6another img.jpeg',
+        $post = Post::find(6);
+        $post->update([
+            'title' => '6another title from post',
+            'content' => '6another content from post',
+            'image' => '6another img.jpeg',
             'likes' => '66',
-          'is_published' => '1',
-    ]);
+            'is_published' => '1',
+        ]);
     }
-
 
     public function delete(){
         $post = Post::find(6);
@@ -68,7 +58,7 @@ class PostController extends Controller
 
     public function firstOrCreate(){
         $post = Post::firstOrCreate([
-        'title' => '12ttt'
+            'title' => '12ttt'
         ],
         [
             'title' => '13 title from post',
@@ -76,8 +66,7 @@ class PostController extends Controller
             'image' => '13 img.jpeg',
             'likes' => '13',
             'is_published' => '0',
-        ]
-        );
+        ]);
         dump($post->content);
         dd('finished');
     }
@@ -86,14 +75,13 @@ class PostController extends Controller
         $post = Post::updateOrCreate([
             'title' => '12ttt'
         ],
-            [
-                'title' => '13 title from post',
-                'content' => '13 content from post',
-                'image' => '13 img.jpeg',
-                'likes' => '13',
-                'is_published' => '1',
-            ]
-        );
+        [
+            'title' => '13 title from post',
+            'content' => '13 content from post',
+            'image' => '13 img.jpeg',
+            'likes' => '13',
+            'is_published' => '1',
+        ]);
         dump($post->content);
         dd('finished');
     }
