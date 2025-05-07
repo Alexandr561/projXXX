@@ -7,8 +7,5 @@ use Illuminate\Http\Request;
 
 class PostController extends Controller
 {
-    public function index(){
-       $post = Post::where('is_published', 1)->first();
-    dump($post->title);
-    }
+
 }
