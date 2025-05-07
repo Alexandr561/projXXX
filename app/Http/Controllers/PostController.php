@@ -19,14 +19,14 @@ class PostController extends Controller
         $postArr = [
             [
                 'title' => 'title from post',
-                'content' => 'content from post',
+                'post_content' => 'content from post',
                 'image' => 'img.jpeg',
                 'likes' => '20',
                 'is_published' => '1',
             ],
             [
                 'title' => 'another title from post',
-                'content' => 'another content from post',
+                'post_content' => 'another content from post',
                 'image' => 'another img.jpeg',
                 'likes' => '33',
                 'is_published' => '1',
