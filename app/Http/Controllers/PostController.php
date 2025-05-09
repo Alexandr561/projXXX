@@ -8,11 +8,8 @@ use Illuminate\Http\Request;
 class PostController extends Controller
 {
     public function index(){
-       $posts = Post::all();
-       foreach ($posts as $post){
-           dump($post->title);
-       }
-       dd('end');
+  $posts = Post::all();
+   return view('posts', compact('posts'));
     }
 
     public function create(){
