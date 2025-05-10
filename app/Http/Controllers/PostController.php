@@ -7,36 +7,41 @@ use Illuminate\Http\Request;
 
 class PostController extends Controller
 {
-    public function index(){
-  $posts = Post::all();
-   return view('posts', compact('posts'));
+    public function index()
+    {
+        $posts = Post::all();
+        return view('post.index', compact('posts'));
     }
 
-    public function create(){
-        $postArr = [
-            [
-                'title' => 'title from post',
-                'content' => 'content from post',
-                'image' => 'img.jpeg',
-                'likes' => '20',
-                'is_published' => '1',
-            ],
-            [
-                'title' => 'another title from post',
-                'content' => 'another content from post',
-                'image' => 'another img.jpeg',
-                'likes' => '33',
-                'is_published' => '1',
-            ]
-        ];
+    public function create()
+    {
+        return view('post.create');
+//        $postArr = [
+//            [
+//                'title' => 'title from post',
+//                'content' => 'content from post',
+//                'image' => 'img.jpeg',
+//                'likes' => '20',
+//                'is_published' => '1',
+//            ],
+//            [
+//                'title' => 'another title from post',
+//                'content' => 'another content from post',
+//                'image' => 'another img.jpeg',
+//                'likes' => '33',
+//                'is_published' => '1',
+//            ]
+//        ];
+//
+//        foreach ($postArr as $item) {
+//            Post::create($item);
+//        }
+//        dd('Okok');
 
-        foreach ($postArr as $item){
-            Post::create($item);
-        }
-        dd('Okok');
     }
 
-    public function update(){
+    public function update()
+    {
         $post = Post::find(6);
         $post->update([
             'title' => '6another title from post',
@@ -47,38 +52,41 @@ class PostController extends Controller
         ]);
     }
 
-    public function delete(){
+    public function delete()
+    {
         $post = Post::find(6);
         $post->delete();
         dd('del');
     }
 
-    public function firstOrCreate(){
+    public function firstOrCreate()
+    {
         $post = Post::firstOrCreate([
             'title' => '12ttt'
         ],
-        [
-            'title' => '13 title from post',
-            'content' => '13 content from post',
-            'image' => '13 img.jpeg',
-            'likes' => '13',
-            'is_published' => '0',
-        ]);
+            [
+                'title' => '13 title from post',
+                'content' => '13 content from post',
+                'image' => '13 img.jpeg',
+                'likes' => '13',
+                'is_published' => '0',
+            ]);
         dump($post->content);
         dd('finished');
     }
 
-    public function updateOrCreate(){
+    public function updateOrCreate()
+    {
         $post = Post::updateOrCreate([
             'title' => '12ttt'
         ],
-        [
-            'title' => '13 title from post',
-            'content' => '13 content from post',
-            'image' => '13 img.jpeg',
-            'likes' => '13',
-            'is_published' => '1',
-        ]);
+            [
+                'title' => '13 title from post',
+                'content' => '13 content from post',
+                'image' => '13 img.jpeg',
+                'likes' => '13',
+                'is_published' => '1',
+            ]);
         dump($post->content);
         dd('finished');
     }

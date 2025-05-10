@@ -3,6 +3,8 @@
 @section('title')Главная? страница@endsection
 @section('content')
     <div>
-        this is posts page
+        @foreach($posts as $post)
+            <div>{{ $post->title }}</div>
+        @endforeach
     </div>
 @endsection
