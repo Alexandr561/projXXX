@@ -42,14 +42,14 @@
 
 
 
-        <nav>
-            <ul>
-                <li class="text-success"><a href="{{route('main.index')}}">Main</a></li>
-                <li class="text-danger"><a href="{{route('post.index')}}">Posts</a></li>
-                <li class="text-primary"><a href="{{route('about.index')}}">About</a></li>
-                <li class="text-dark bg-light"><a href="{{route('contacts.index')}}">Contacts</a></li>
-            </ul>
-        </nav>
+{{--        <nav>--}}
+{{--            <ul>--}}
+{{--                <li class="text-success"><a href="{{route('main.index')}}">Main</a></li>--}}
+{{--                <li class="text-danger"><a href="{{route('post.index')}}">Posts</a></li>--}}
+{{--                <li class="text-primary"><a href="{{route('about.index')}}">About</a></li>--}}
+{{--                <li class="text-dark bg-light"><a href="{{route('contacts.index')}}">Contacts</a></li>--}}
+{{--            </ul>--}}
+{{--        </nav>--}}
     </div>
     @yield('content')
 </div>
