@@ -7,8 +7,7 @@
     <div>
         <div>{{$post->id}}. {{$post->title}}</div>
         <div>{{$post->content}}</div>
-        <div>{{$post->likes}}</div>
-    </div>
+        <div>Image: {{ $post->image }}</div>
 
     <div>
         <a href="{{route('post.edit', $post->id)}} " class="btn btn-secondary">EDITE</a>
