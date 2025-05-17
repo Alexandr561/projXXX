@@ -2,15 +2,22 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\Post;
+use App\Models\Tag;
 use Illuminate\Http\Request;
 
 class PostController extends Controller
 {
     public function index()
     {
-        $posts = Post::all();
-        return view('post.index', compact('posts'));
+//       $category = Category::find(1);
+//
+//       dd($category->posts);
+        $tag = Tag::find(1);
+        dd($tag->posts);
+       $post = Post::find(2);
+       dd($post->tags);
     }
 
     public function create()
@@ -57,6 +64,7 @@ class PostController extends Controller
     {
         return view('post.show', compact('post'));
     }
+
     public function edit(Post $post)
     {
         return view('post.edit', compact('post'));
@@ -88,10 +96,11 @@ class PostController extends Controller
 //    }
 
 
-public function destroy(Post $post){
+    public function destroy(Post $post)
+    {
         $post->delete();
         return redirect()->route('post.index');
-}
+    }
 
 
 //    public function delete()
