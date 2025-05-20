@@ -11,18 +11,24 @@ class PostController extends Controller
 {
     public function index()
     {
+        $posts = Post::all();
+
+        return view('post.index', compact('posts',));
+
 //       $category = Category::find(1);
 //
 //       dd($category->posts);
-        $tag = Tag::find(1);
-        dd($tag->posts);
-       $post = Post::find(2);
-       dd($post->tags);
+//        $tag = Tag::find(1);
+//        dd($tag->posts);
+//       $post = Post::find(2);
+//       dd($post->tags);
     }
 
     public function create()
     {
-        return view('post.create');
+        $categories = Category::all();
+        $tags = Tag::all();
+        return view('post.create', compact('categories', 'tags'));
 //        $postArr = [
 //            [
 //                'title' => 'title from post',
@@ -50,38 +56,72 @@ class PostController extends Controller
 
     public function store(Request $request)
     {
+
         $validated = $request->validate([
-            'title' => 'required|max:255',
-            'content' => 'required',
-            'image' => 'nullable|string'
+            'title' => 'required|string|max:255',
+            'content' => 'required|string',
+            'image' => 'nullable|string', // или 'image|mimes:jpeg,png|max:2048' для файлов
+            'category_id' => 'required|exists:categories,id',
+            'tags' => 'nullable|array',
+            'tags.*' => 'exists:tags,id', // Проверяем каждый ID тега
+        ]);
+        //        $tags = $validated['tags'];
+//        unset($validated['tags']);
+//        $post = Post::create($validated);
+//
+//        $post->tags()->attach($tags);
+//
+//        return redirect()->route('post.index');
+
+        // Создаём пост, исключая теги
+        $post = Post::create([
+            'title' => $validated['title'],
+            'content' => $validated['content'],
+            'image' => $validated['image'],
+            'category_id' => $validated['category_id'],
         ]);
 
-        Post::create($validated);
+        // Прикрепляем теги (если они есть)
+        if (!empty($validated['tags'])) {
+            $post->tags()->attach($validated['tags']);
+        }
+
         return redirect()->route('post.index');
     }
 
+
+
     public function show(Post $post)
     {
+
         return view('post.show', compact('post'));
     }
 
     public function edit(Post $post)
     {
-        return view('post.edit', compact('post'));
+        $tags = Tag::all();
+        $categories = Category::all();
+        return view('post.edit', compact('post', 'categories', 'tags'));
     }
 
     public function update(Post $post)
     {
+        // 1. Валидация данных
         $validatedData = request()->validate([
             'title' => 'required|string|max:255',
             'content' => 'required|string',
-            'image' => 'nullable|string'
+            'image' => 'nullable|string',
+            'category_id' => 'required|exists:categories,id',
+            'tags' => 'nullable|array',
+            'tags.*' => 'exists:tags,id' // Проверяем каждый ID тега
         ]);
 
-        $post->update($validatedData);
-
-        return redirect()->route('post.show', $post->id)
-            ->with('success', 'Post updated successfully!');
+      $tags = $validatedData['tags'];
+      unset($validatedData['tags']);
+      $post->update($validatedData);
+      $post->tags()->sync($tags);
+        // 4. Перенаправляем на страницу поста
+        return redirect()->route('post.show', $post->id);
     }
 //    public function update()
 //    {
