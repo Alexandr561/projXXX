@@ -20,7 +20,7 @@
             <label for="image">Image</label>
             <input type="text" name="image" class="form-control" id="image"
                    value="{{ old('image', $post->image) }}">
-
+        </div>
 
         <div class="form-group">
             <button type="submit" class="btn btn-primary">UPDATE</button>

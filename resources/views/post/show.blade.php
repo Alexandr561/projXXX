@@ -48,5 +48,5 @@
             Back to All Posts
         </a>
     </div>
-
+    </div>
 @endsection
